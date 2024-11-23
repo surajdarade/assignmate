@@ -100,12 +100,12 @@ export function NavUser({ user }: { user: UserResource }) {
               </DropdownMenuItem>
             </DropdownMenuGroup> */}
             {/* <DropdownMenuSeparator /> */}
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
+            <DropdownMenuGroup className="cursor-pointer">
+              <DropdownMenuItem className="cursor-pointer">
                 <BadgeCheck />
-                Account
+                Manage Account
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
                 <CreditCard />
                 Report a problem
               </DropdownMenuItem>
@@ -115,7 +115,7 @@ export function NavUser({ user }: { user: UserResource }) {
               </DropdownMenuItem> */}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
               <LogOut />
               Sign out
             </DropdownMenuItem>
