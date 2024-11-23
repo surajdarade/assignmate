@@ -6,7 +6,7 @@ const Footer = () => {
           Created by{" "}
           <a
             className="hover:underline"
-            href="https://www.linknedin.com/in/surajdarade"
+            href="https://www.linkedin.com/in/surajdarade"
             aria-label="Suraj Darade"
             target="_blank"
             rel="noreferrer"

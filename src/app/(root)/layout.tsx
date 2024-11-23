@@ -12,7 +12,7 @@ export default function SetupLayout({
     redirect("sign-in");
   }
 
-  redirect("admin");
+  redirect("/");
 
   return <>{children}</>;
 }
