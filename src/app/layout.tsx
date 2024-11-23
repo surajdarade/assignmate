@@ -9,7 +9,7 @@ import ToastProvider from "@/providers/toast-provider";
 
 export const metadata: Metadata = {
   title: "Assignmate",
-  description: "Assignmate",
+  description: "Assignmate: Where great writers meet great opportunities.",
 };
 
 const inter = Inter({ subsets: ['latin'] });
