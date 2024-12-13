@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-  CreditCard,
-  LogOut,
-  Sparkles,
-} from "lucide-react";
+import { BadgeCheck, ChevronsUpDown, CreditCard, LogOut } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -26,6 +19,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
+import { useClerk } from "@clerk/nextjs"; // Import Clerk hook for managing account and logout actions
 import type { UserResource } from "@clerk/types"; // Import the Clerk user type
 
 // Helper function to get initials from full name
@@ -39,8 +33,9 @@ const getInitials = (fullName: string): string => {
 
 export function NavUser({ user }: { user: UserResource }) {
   const { isMobile } = useSidebar();
+  const { openUserProfile, signOut } = useClerk(); // Clerk actions for managing account and signing out
 
-  const userInitials = user.fullName ? getInitials(user.fullName) : "CN"; // Default to "CN" if no full name
+  const userInitials = user.fullName ? getInitials(user.fullName) : "😼";
 
   return (
     <SidebarMenu>
@@ -53,9 +48,14 @@ export function NavUser({ user }: { user: UserResource }) {
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 {user.imageUrl ? (
-                  <AvatarImage src={user.imageUrl} alt={user.fullName || "User"} />
+                  <AvatarImage
+                    src={user.imageUrl}
+                    alt={user.fullName || "User"}
+                  />
                 ) : (
-                  <AvatarFallback className="rounded-lg">{userInitials}</AvatarFallback>
+                  <AvatarFallback className="rounded-lg">
+                    {userInitials}
+                  </AvatarFallback>
                 )}
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
@@ -77,9 +77,14 @@ export function NavUser({ user }: { user: UserResource }) {
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
                   {user.imageUrl ? (
-                    <AvatarImage src={user.imageUrl} alt={user.fullName || "User"} />
+                    <AvatarImage
+                      src={user.imageUrl}
+                      alt={user.fullName || "User"}
+                    />
                   ) : (
-                    <AvatarFallback className="rounded-lg">{userInitials}</AvatarFallback>
+                    <AvatarFallback className="rounded-lg">
+                      {userInitials}
+                    </AvatarFallback>
                   )}
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -93,31 +98,26 @@ export function NavUser({ user }: { user: UserResource }) {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            {/* <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup> */}
-            {/* <DropdownMenuSeparator /> */}
-            <DropdownMenuGroup className="cursor-pointer">
-              <DropdownMenuItem className="cursor-pointer">
+            <DropdownMenuGroup>
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={() => openUserProfile()} // Open Clerk's user profile modal
+              >
                 <BadgeCheck />
                 Manage Account
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer">
                 <CreditCard />
-                Report a problem
+                Report a Problem
               </DropdownMenuItem>
-              {/* <DropdownMenuItem>
-                <Bell />
-                Notifications
-              </DropdownMenuItem> */}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => signOut()} // Log the user out
+            >
               <LogOut />
-              Sign out
+              Sign Out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

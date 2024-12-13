@@ -30,7 +30,7 @@ const Navbar = () => {
             <TooltipProvider disableHoverableContent>
               <Tooltip delayDuration={100}>
                 <TooltipTrigger asChild>
-                  <div>
+                  <div className="mt-1">
                     <ClerkLoading>
                       <Skeleton className="h-8 w-8 rounded-full" />
                     </ClerkLoading>
